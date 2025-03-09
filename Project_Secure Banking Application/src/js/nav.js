@@ -3,7 +3,11 @@ function nav() {
       <div class="container d-flex justify-content-center"> 
           <ul class="navbar-nav" style="padding: 15px 15px 15px 15px">
               <li class="nav-item">
-                  <a class="nav-link" href="/index.html">Home</a>
+                  <a class="nav-link" href="index.html">Home</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login</a>
               </li>
       `;
   if (sessionStorage.getItem("login") == "true") {
@@ -16,7 +20,7 @@ function nav() {
           </li> |`;
   } else {
     navOutPut += `<li class="nav-item">
-          <a class="nav-link" href="/login.html">Login</a> 
+          <a class="nav-link" href="login.html">Login</a> 
           </li>`;
   }
   navOutPut += `</ul></div>`;
