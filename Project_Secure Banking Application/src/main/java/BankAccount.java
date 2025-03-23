@@ -1,57 +1,38 @@
-package src.main.java.com.project.mybankaccount;
-public class BankAccount
-{
-	//instance variables
-	private double balance;
-	private int accountNumber;
-   
-   //1st constructor - sets balance to zero
-   public BankAccount(int accNo)
-   {
-      accountNumber = accNo;
-      balance = 0.00;
-   }
-   
-   //2nd constructor - gets account number
-   public int getAccountNumber()
-   {
-      return accountNumber;
-   }
-   
-   //1st constructor - sets balance to zero
-   public BankAccount()
-   {
-      balance = 0.00;
-   }
-   
-   //2nd constructor - sets constructor to specified amount
-   public BankAccount(int accNo, double balanceIn)
-   {  
-      accountNumber = accNo;
-      balance = balanceIn;
-   }
-   
-	//methods
+public class BankAccount {
+   private String accountNumber;
+   private String accountHolder;
+   private double balance;
 
-	//return the balance
-	public double getBalance()
-	{
-		return balance;
-	}
-	
-	//reduce the balance by amount
-	public void withdraw(double amount)
-	{
-		if(amount <= balance) //if enought money
-			balance = balance - amount; //balance -=amount
-	}
-   
-	//increase the balance by amount
-	public void deposit(double amount)
-	{
-		balance = balance + amount;	
-	}
-	
-	
+   // Constructor
+   public BankAccount(String accountNumber, String accountHolder, double balance) {
+       this.accountNumber = accountNumber;
+       this.accountHolder = accountHolder;
+       this.balance = balance;
+   }
 
-}//end class
+   // Accessor methods
+   public String getAccountNumber() {
+       return accountNumber;
+   }
+
+   public String getAccountHolder() {
+       return accountHolder;
+   }
+
+   public double getBalance() {
+       return balance;
+   }
+
+   // Mutator methods
+   public void setAccountNumber(String accountNumber) {
+       this.accountNumber = accountNumber;
+   }
+
+   public void setAccountHolder(String accountHolder) {
+       this.accountHolder = accountHolder;
+   }
+
+   public void setBalance(double balance) {
+       this.balance = balance;
+   }
+}
