@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "BankingSystemDemo",
+      "request": "launch",
+      "mainClass": "BankingSystemDemo",
+      "projectName": "webdemo"
+    },
+    {
+      "type": "java",
       "name": "BankSystem",
       "request": "launch",
       "mainClass": "BankSystem",

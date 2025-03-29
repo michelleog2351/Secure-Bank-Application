@@ -1,0 +1,44 @@
+/* Styling for the active page link */
+.navbar-nav .nav-link.active {
+  font-weight: bold; /* Make text bold */
+  color: #007bff !important; /* Change text color to Bootstrap's primary color */
+  border-bottom: 3px solid #007bff; /* Add an underline effect */
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-toggler-icon {
+  transition: transform 0.3s ease;
+}
+
+.navbar-toggler:is(.collapsed) .navbar-toggler-icon {
+  transform: rotate(180deg);
+}
+
+/* Breadcrumb container styling */
+.breadcrumb {
+  background-color: transparent; /* Removes default background */
+  margin: 10px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item {
+  font-size: 16px;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb-item.active {
+  color: #000;
+  font-weight: bold;
+}

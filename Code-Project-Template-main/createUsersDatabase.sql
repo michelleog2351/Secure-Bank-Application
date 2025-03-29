@@ -51,6 +51,8 @@ INSERT INTO `customers` (`accountNo`, `password`, `balance`) VALUES
 --
 -- Indexes for table `users`
 --
+
+select * from customers;
 ALTER TABLE `customers`
   ADD UNIQUE KEY `accountNo` (`accountNo`);
 COMMIT;

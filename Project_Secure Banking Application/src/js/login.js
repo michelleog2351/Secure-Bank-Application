@@ -1,6 +1,26 @@
 $(document).ready(function () {
   nav();
+  footer();
+
+  $("#loginForm").append(`
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="loginEmail" name="loginEmail" placeholder="example@atu.ie" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label" >Password</label>
+      <input type="password" class="form-control" id="loginPassword" name="password" required>
+    </div>
+    
+    <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe">
+          <label class="form-check-label" for="rememberMe">Remember Me</label>
+    </div>  
+    <br>
+  <button type="submit" class="btn btn-primary w-100" id="loginButton">Login</button>`);
 });
+
 var attempt = 3; // Variable to count number of attempts
 
 // Login validation
