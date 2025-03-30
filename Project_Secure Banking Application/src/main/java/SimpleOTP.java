@@ -5,7 +5,7 @@ public class SimpleOTP {
     public static void main(String[] args)
     {
         HashMap<String, String> users = new HashMap<>();
-        userOTP.put("admin", "password123"); 
+        userOTP.put("test.admin1", "password123"); 
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the OTP: ");

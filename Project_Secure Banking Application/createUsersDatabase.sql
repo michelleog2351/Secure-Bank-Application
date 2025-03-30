@@ -35,18 +35,21 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`username`, `password`, `role`) VALUES
 ('test.admin1', 'hashed_password_here', 'superadmin');
 
+select * from admin;
+
 -- customer table
 CREATE TABLE `customer` (
-  `accountNo` VARCHAR(25) NOT NULL,
-  `first_name` VARCHAR(50) NOT NULL,
-  `last_name` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(100) NOT NULL UNIQUE,
-  `phone_no` VARCHAR(20) NOT NULL,
-  `username` VARCHAR(50) NOT NULL UNIQUE,
-  `password` VARCHAR(255) NOT NULL,
-  `balance` FLOAT NOT NULL,
-  PRIMARY KEY (`accountNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	  `customerID` INT AUTO_INCREMENT PRIMARY KEY,
+	  `accountNo` VARCHAR(25) NOT NULL UNIQUE,
+	  `first_name` VARCHAR(50) NOT NULL,
+	  `last_name` VARCHAR(50) NOT NULL,
+	  `email` VARCHAR(100) NOT NULL UNIQUE,
+	  `phone_no` VARCHAR(20) NOT NULL,
+	  `username` VARCHAR(50) NOT NULL UNIQUE,
+	  `password` VARCHAR(255) NOT NULL,
+	  `balance` FLOAT NOT NULL,
+	  PRIMARY KEY (`accountNo`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 --
