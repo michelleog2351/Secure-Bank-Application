@@ -10,7 +10,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mysecureapplication`
+-- Database: `bank_system`
 --
 
 DROP DATABASE IF EXISTS `bank_system`;
@@ -20,23 +20,22 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `bank_system` /*!40100 DEFAULT CHARACTE
 USE `bank_system`;
 -- --------------------------------------------------------
 
---
--- Table structure for table `users`
---
-
 -- admin table
-CREATE TABLE `admin` (
-  `adminID` INT AUTO_INCREMENT PRIMARY KEY,
-  `username` VARCHAR(50) NOT NULL UNIQUE,
-  `password` VARCHAR(255) NOT NULL, 
-  `role` ENUM('superadmin') NOT NULL DEFAULT 'superadmin'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE `admin` (
+--   `adminID` INT AUTO_INCREMENT PRIMARY KEY,
+--   `username` VARCHAR(50) NOT NULL UNIQUE,
+--   `password` VARCHAR(255) NOT NULL, 
+--   `role` ENUM('superadmin') NOT NULL DEFAULT 'superadmin'
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `admin` (`username`, `password`, `role`) VALUES
-('test.admin1', 'hashed_password_here', 'superadmin');
+-- INSERT INTO `admin` (`username`, `password`, `role`) VALUES
+-- ('test.admin1', 'hashed_password_here', 'superadmin');
 
-select * from admin;
+-- select * from admin;
 
+--
+-- Table structure for table `customer`
+--
 -- customer table
 CREATE TABLE `customer` (
 	  `customerID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,10 +51,6 @@ CREATE TABLE `customer` (
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
---
--- Dumping data for table `users`
---
-
 INSERT INTO `customer` (`accountNo`, `first_name`, `last_name`, `email`, `phone_no`, `username`, `password`, `balance`) VALUES
 ('test', 'John', 'Doe', 'johndoe@example.com', '+353 123 4567', 'john.doe', 'test', 100.23),
 ('BOI16589', 'Jane', 'Smith', 'jane.smith@example.com', '+353 234 5678', 'jane.smith', 'password1', 100.23),
@@ -66,19 +61,23 @@ INSERT INTO `customer` (`accountNo`, `first_name`, `last_name`, `email`, `phone_
 ('BOI65214', 'Daniel', 'Miller', 'daniel.miller@example.com', '+353 789 0123', 'daniel.miller', 'password6', 5000.00),
 ('BOI66985', 'Sophia', 'Anderson', 'sophia.anderson@example.com', '+353 890 1234', 'sophia.anderson', 'password7', 86.35);
 
+select * from customer;
+ALTER TABLE `customer`
+  ADD UNIQUE KEY `accountNo` (`accountNo`);
+COMMIT;
 
+--
+-- Dumping data for table `customer`
+--
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `customer`
 --
 
-select * from customer;
-ALTER TABLE `customer`
-  ADD UNIQUE KEY `accountNo` (`accountNo`);
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

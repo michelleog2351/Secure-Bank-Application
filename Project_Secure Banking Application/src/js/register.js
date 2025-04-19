@@ -4,16 +4,16 @@ $(document).ready(function () {
 
   $("#registerForm").append(`
       <div class="row">
-    <div class="col-md-6 mb-3">
-        <label for="registerFName" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="registerFName" name="registerFName" required>
-    </div>
+        <div class="col-md-6 mb-3">
+            <label for="registerFName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="registerFName" name="registerFName" required>
+        </div>
 
-    <div class="col-md-6 mb-3">
-        <label for="registerLName" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="registerLName" name="registerLName" required>
-    </div>
-</div>
+        <div class="col-md-6 mb-3">
+            <label for="registerLName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="registerLName" name="registerLName" required>
+        </div>
+      </div>
 
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
@@ -23,72 +23,107 @@ $(document).ready(function () {
       <div class="mb-3">
         <label for="phoneNo" class="form-label">Phone No.</label>
         <input type="tel" class="form-control" id="registerphoneNo" name="registerphoneNo" placeholder="+353 564 7891" required>
+        <div id="phoneNoError"></div>
       </div>
 
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" id="registerUsername" name="registerUsername" placeholder="firstname.lastname" required>
+        <div id="usernameError"></div>
       </div>
   
       <div class="mb-3">
         <label for="password" class="form-label" >Password</label>
         <input type="password" class="form-control" id="registerPassword" name="password" required>
+          <div id="passwordError"></div>
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">Confirm Password</label>
         <input type="password" class="form-control" id="registerConfirmPassword" name="confirmPassword" required>
       </div>
+      <div id="passwordError"></div>
     <br>
     <button type="submit" class="btn btn-primary w-100" id="registerButton">Register</button>`);
 });
 
 var attempt = 3; // Variable to count number of attempts
 
-// Login validation
-$("#submit").click(function () {
-  var username = $("#username").val();
-  var password = $("#password").val();
+// Register validation
+$("#registerButton").click(function () {
+  var registerFName = $("#registerFName").val();
+  var registerLName = $("#registerLName").val();
+  var registerEmail = $("#registerEmail").val();
+  var registerphoneNo = $("#registerphoneNo").val();
+  var registerUsername = $("#registerUsername").val();
+  var registerPassword = $("#registerPassword").val();
+  var registerConfirmPassword = $("#registerConfirmPassword").val();
 
+  var emailRegEx = /^[a-zA-Z0-9._%+-]+@atu\.ie$/;
   var usernameRegEx = /^[a-zA-Z]{5,15}\.[a-zA-Z]{5,15}$/;
   var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/;
+  var phoneNoRegEx = /^(\+353\s?\d{1,3}[\s]?\d{3,4}[\s]?\d{3,4}|\d{10})$/;
 
-  if (!usernameRegEx.test(username)) {
+  if (!emailRegEx.test(registerEmail)) {
     alert("Invalid Username! Please try again! e.g. firstname.lastname");
     return false;
   }
 
-  if (!passwordRegEx.test(password)) {
-    alert("Invalid password! Please try again!");
+  if (!phoneNoRegEx.test(registerphoneNo)) {
+    //alert("Invalid password! Please try again!");
+    $("#registerphoneNo").css("color", "red");
+    $("#phoneNoError").text("Please enter a valid phone number.").show();
     return false;
   }
 
-  if (username === "adams.apple" && password === "Password#123") {
-    alert("Login successfully");
-    window.location = "success.html";
-    return false;
-  } else {
-    attempt--;
-    alert("You have left " + attempt + " attempts.");
-
-    if (attempt === 0) {
-      $("#username, #password, #submit").prop("disabled", true);
-    }
+  if (!usernameRegEx.test(username)) {
+    //alert("Invalid Username! Please try again! e.g. firstname.lastname");
+    $("#registerUsername").css("color", "red");
+    $("#usernameError")
+      .text("Please enter a valid username e.g. firstname.lastname.9")
+      .show();
     return false;
   }
+
+  if (!passwordRegEx.test(registerPassword)) {
+    //alert("Invalid password! Please try again!");
+    $("#registerPassword").css("color", "red");
+    $("#passwordError").text("Please enter a valid password.").show();
+    return false;
+  }
+
+  if (!passwordRegEx.test(registerConfirmPassword)) {
+    //alert("Invalid password! Please try again!");
+    $("#registerConfirmPassword").css("color", "red");
+    $("#passwordError").text("Please enter a valid password.").show();
+    return false;
+  }
+
+  // if (username === "adams.apple" && password === "Password#123") {
+  //   alert("Login successfully");
+  //   window.location = "success.html";
+  //   return false;
+  // } else {
+  //   attempt--;
+  //   alert("You have left " + attempt + " attempts.");
+
+  //   if (attempt === 0) {
+  //     $("#username, #password, #submit").prop("disabled", true);
+  //   }
+  //   return false;
+  // }
 });
 
-
 $("#registerForm").on("submit", function (e) {
-    let password = $("#registerPassword").val();
-    let confirmPassword = $("#registerConfirmPassword").val();
+  let password = $("#registerPassword").val();
+  let confirmPassword = $("#registerConfirmPassword").val();
 
-    if (password !== confirmPassword) {
-      e.preventDefault(); // Prevent form submission
-      $("#passwordError").show(); // Show error message
-    } else {
-      $("#passwordError").hide(); // Hide error message if they match
-    }
+  if (password !== confirmPassword) {
+    e.preventDefault(); // Prevent form submission
+    $("#passwordError").show(); // Show error message
+  } else {
+    $("#passwordError").hide(); // Hide error message if they match
+  }
 });
 
 // Email validation
