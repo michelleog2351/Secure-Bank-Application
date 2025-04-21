@@ -38,28 +38,26 @@ USE `bank_system`;
 --
 -- customer table
 CREATE TABLE `customer` (
-	  `customerID` INT AUTO_INCREMENT PRIMARY KEY,
-	  `accountNo` VARCHAR(25) NOT NULL UNIQUE,
+	  `accountNo` INT AUTO_INCREMENT PRIMARY KEY,
 	  `first_name` VARCHAR(50) NOT NULL,
 	  `last_name` VARCHAR(50) NOT NULL,
 	  `email` VARCHAR(100) NOT NULL UNIQUE,
 	  `phone_no` VARCHAR(20) NOT NULL,
 	  `username` VARCHAR(50) NOT NULL UNIQUE,
 	  `password` VARCHAR(255) NOT NULL,
-	  `balance` FLOAT NOT NULL,
-	  PRIMARY KEY (`accountNo`)
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	  `balance` FLOAT NOT NULL
+      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `customer` (`accountNo`, `first_name`, `last_name`, `email`, `phone_no`, `username`, `password`, `balance`) VALUES
-('test', 'John', 'Doe', 'johndoe@example.com', '+353 123 4567', 'john.doe', 'test', 100.23),
-('BOI16589', 'Jane', 'Smith', 'jane.smith@example.com', '+353 234 5678', 'jane.smith', 'password1', 100.23),
-('BOI23658', 'Michael', 'Brown', 'michael.brown@example.com', '+353 345 6789', 'michael.brown', 'password2', 2000.36),
-('BOI41235', 'Emily', 'Davis', 'emily.davis@example.com', '+353 456 7890', 'emily.davis', 'password3', 500.99),
-('BOI87854', 'Chris', 'Wilson', 'chris.wilson@example.com', '+353 567 8901', 'chris.wilson', 'password4', 123.65),
-('BOI11236', 'Emma', 'Johnson', 'emma.johnson@example.com', '+353 678 9012', 'emma.johnson', 'password5', 6587.21),
-('BOI65214', 'Daniel', 'Miller', 'daniel.miller@example.com', '+353 789 0123', 'daniel.miller', 'password6', 5000.00),
-('BOI66985', 'Sophia', 'Anderson', 'sophia.anderson@example.com', '+353 890 1234', 'sophia.anderson', 'password7', 86.35);
+INSERT INTO `customer` (`first_name`, `last_name`, `email`, `phone_no`, `username`, `password`, `balance`) VALUES
+('John', 'Doe', 'johndoe@example.com', '+353 123 4567', 'john.doe', 'test', 100.23),
+('Jane', 'Smith', 'jane.smith@example.com', '+353 234 5678', 'jane.smith', 'password1', 100.23),
+('Michael', 'Brown', 'michael.brown@example.com', '+353 345 6789', 'michael.brown', 'password2', 2000.36),
+('Emily', 'Davis', 'emily.davis@example.com', '+353 456 7890', 'emily.davis', 'password3', 500.99),
+('Chris', 'Wilson', 'chris.wilson@example.com', '+353 567 8901', 'chris.wilson', 'password4', 123.65),
+('Emma', 'Johnson', 'emma.johnson@example.com', '+353 678 9012', 'emma.johnson', 'password5', 6587.21),
+('Daniel', 'Miller', 'daniel.miller@example.com', '+353 789 0123', 'daniel.miller', 'password6', 5000.00),
+('Sophia', 'Anderson', 'sophia.anderson@example.com', '+353 890 1234', 'sophia.anderson', 'password7', 86.35);
 
 select * from customer;
 ALTER TABLE `customer`
