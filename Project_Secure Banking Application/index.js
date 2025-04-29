@@ -16,13 +16,13 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
-    const { loginEmail, loginPassword } = req.body;
-  
-    console.log(req.body);
-  
-    db.loginCustomer(req, res);
-  });
+  const { loginEmail, loginPassword } = req.body;
+
+  console.log(req.body);
+
+  db.loginCustomer(req, res);
+});
 
 var myServer = app.listen(3000, function () {
-  console.log("IRLElection2024 Server listening on port 3000...");
+  console.log("Bank System Server listening on port 3000...");
 });
