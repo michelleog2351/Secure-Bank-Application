@@ -50,7 +50,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
+-- for testing
 -- INSERT INTO `customer` (`first_name`, `last_name`, `email`, `phone_no`, `username`, `password`, `balance`) VALUES
 -- ('John', 'Doe', 'johndoe@atu.ie', '+353 123 4567', 'john.doe', 'test', 100.23),
 -- ('Jane', 'Smith', 'jane.smith@example.com', '+353 234 5678', 'jane.smith', 'password1', 100.23),
@@ -66,7 +66,7 @@ ALTER TABLE `customer`
   ADD UNIQUE KEY `accountNo` (`accountNo`);
 COMMIT;
 
-DROP TABLE IF EXISTS `customer`;
+-- DROP TABLE IF EXISTS `customer`;
 
 
 --
