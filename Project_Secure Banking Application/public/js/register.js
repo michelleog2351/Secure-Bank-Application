@@ -175,7 +175,7 @@ $(document).ready(function () {
     $("#registerButton").prop("disabled", true);
 
     $.ajax({
-      url: "/register", // Your backend endpoint
+      url: "/register",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({

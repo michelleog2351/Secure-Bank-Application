@@ -1,4 +1,4 @@
-# 💳 Secure-Bank-Application
+# 💶 Secure-Bank-Application
 
 ## 📋 Project Overview
 
@@ -12,7 +12,7 @@ A secure banking web application designed to demonstrate secure programming prac
 - **Node.js** – backend server logic (v20.4.0)
 - **Express.js** – routing and server management
 - **MySQL** – relational database system
-- **HTML/CSS/JavaScript** – frontend interface
+- **HTML/CSS/JavaScript/BootStrap** – frontend interface
 - **bcryptjs** – password hashing
 - **Git & GitHub** – version control
 - **Live Server** – local development & testing
@@ -37,7 +37,7 @@ The following `npm` commands were used during project setup:
 
 ```bash
 npm init
-npm install express mysql2 bcryptjs
+npm install express mysql2 bcryptjs body-parser
 ```
 
 ---
@@ -70,7 +70,7 @@ npm install express mysql2 bcryptjs
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/secure-banking-system.git
+git clone https://github.com/michelleog2351/Secure-Bank-Application.git
 ```
 
 ### 2. Navigate to the project directory:

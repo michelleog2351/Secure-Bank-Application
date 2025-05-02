@@ -33,6 +33,14 @@ app.post("/balance", (req, res) => {
   });
 });
 
+// db.getBalance(accountNo, (err, balance) => {
+//     if (err) {
+//       console.error("DB Error:", err);
+//       return res.status(500).send("Error fetching balance");
+//     }
+//     res.json({ balance });
+//   });
+
 app.post("/deposit", (req, res) => {
   const { accountNo, amount } = req.body;
 

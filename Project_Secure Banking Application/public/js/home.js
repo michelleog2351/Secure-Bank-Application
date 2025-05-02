@@ -54,8 +54,54 @@ $(document).ready(function () {
       alert("Please enter a valid amount.");
     }
   });
+  
+  // $(document).on("click", "#confirmWithdraw", function () {
+  //   const withdrawAmount = parseFloat($("#withdrawAmount").val());
+  //   if (isNaN(withdrawAmount) || withdrawAmount <= 0) {
+  //     showTransactionAlert("Please enter a valid withdrawal amount.");
+  //     return;
+  //   }
+
+  //   // Fetch current balance before proceeding
+  //   $.ajax({
+  //     url: "/balance",
+  //     type: "POST",
+  //     contentType: "application/json",
+  //     data: JSON.stringify({ accountNo }),
+  //     success: function (res) {
+  //       const balance = res.balance;
+
+  //       if (withdrawAmount > balance) {
+  //         showTransactionAlert(
+  //           "Insufficient funds. Please enter a lower amount."
+  //         );
+  //       } else {
+  //         updateBalance(accountNo, withdrawAmount, false); // Proceed with withdrawal
+  //         hideTransactionAlert();
+  //       }
+  //     },
+  //     error: function () {
+  //       showTransactionAlert("Failed to check balance. Try again.");
+  //     },
+  //   });
+  // });
 
   appendActionButtons();
+
+  // function showTransactionAlert(message) {
+  //   if (!$("#transactionAlert").length) {
+  //     $("#transactionForm").prepend(
+  //       `<div id="transactionAlert" class="alert alert-danger mt-2">${message}</div>`
+  //     );
+  //   } else {
+  //     $("#transactionAlert").text(message);
+  //   }
+  // }
+  
+  // function hideTransactionAlert() {
+  //   $("#transactionAlert").remove();
+  // }
+  
 
   let currentBalance = 0.0;
   function checkBalance() {
@@ -67,18 +113,4 @@ $(document).ready(function () {
       : currentBalance - amount;
     checkBalance();
   }
-
-  // doesn't work
-  // function updateBalance(accountNo, amount, isDeposit) {
-  //   const endpoint = isDeposit ? "/deposit" : "/withdraw";
-
-  //   $.post(endpoint, { accountNo, amount }, function (data) {
-  //     currentBalance = data.newBalance;
-  //     checkBalance();
-  //   }).fail(function (xhr) {
-  //     const errorMsg =
-  //       xhr.status === 400 ? "Insufficient funds." : "Transaction failed.";
-  //     alert(errorMsg);
-  //   });
-  // }
 });
