@@ -128,7 +128,6 @@ When a user registers, the system captures their details securely and inserts th
   "password": "Happys*1187",
   "balance": 0
 }
-The backend logs successful insertion and request data during development for verification. The server runs on:
 ```
 
 ### 🧪 Testing
