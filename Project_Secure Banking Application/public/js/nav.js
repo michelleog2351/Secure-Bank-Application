@@ -14,9 +14,6 @@ function nav() {
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="accountInformation.html">Account Information</a>
-          </li>
         </ul>
 
         <!-- Right side links -->
@@ -50,6 +47,12 @@ function nav() {
   $("#logout").click(function (e) {
     e.preventDefault();
     sessionStorage.removeItem("login");
-    location.replace("index.html");
+    location.replace("login.html");
   });
+}
+
+function requireLogin() {
+  if (sessionStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+  }
 }

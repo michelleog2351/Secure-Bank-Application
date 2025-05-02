@@ -28,7 +28,7 @@ $(document).ready(function () {
     e.preventDefault();
 
     // Clear any previous
-    $(".alert-danger").remove(); // Remove any existing alert
+    $(".alert-danger").remove();
     var loginEmail = $("#loginEmail").val().trim();
     var loginPassword = $("#loginPassword").val().trim();
 
@@ -36,7 +36,7 @@ $(document).ready(function () {
     var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/;
 
     if (!emailRegEx.test(loginEmail)) {
-      $(".alert-danger").remove(); // Remove any existing alert
+      $(".alert-danger").remove();
 
       $("#loginForm").append(
         `<div class="alert alert-danger mt-3" role="alert">**Invalid email! Please enter a valid atu.ie email."</div>`
@@ -45,7 +45,7 @@ $(document).ready(function () {
     }
 
     if (!passwordRegEx.test(loginPassword)) {
-      $(".alert-danger").remove(); // Remove any existing alert
+      $(".alert-danger").remove();
 
       $("#loginForm").append(
         `<div class="alert alert-danger mt-3" role="alert">**Invalid password! Please try again!</div>`
@@ -55,32 +55,35 @@ $(document).ready(function () {
 
     // If valid, attempt login
     $.post("/login", { loginEmail, loginPassword })
-    .done(function (response) {
-      alert("An OTP has been sent to your phone number ending in 9999.");
-      let otp = prompt("Please enter the 6-digit OTP:");
-      if (otp === "123456") {
-        sessionStorage.setItem("login", "true");
-        location.replace("http://localhost:3000/index.html");
-      } else {
+      .done(function (response) {
+        alert("An OTP has been sent to your phone number.");
+        let otp = prompt("Please enter the 6-digit OTP (123456):");
+        if (otp === "123456") {
+          sessionStorage.setItem("login", "true");
+          location.replace("http://localhost:3000/index.html");
+        } else {
+          attempt--;
+          $(".alert-danger").remove();
+          $("#loginForm").append(
+            `<div class="alert alert-danger mt-3" role="alert">Invalid OTP. You have ${attempt} attempt(s) left.</div>`
+          );
+          if (attempt === 0) {
+            $("#loginEmail, #loginPassword, #loginButton").prop(
+              "disabled",
+              true
+            );
+          }
+        }
+      })
+      .fail(function () {
         attempt--;
         $(".alert-danger").remove();
         $("#loginForm").append(
-          `<div class="alert alert-danger mt-3" role="alert">Invalid OTP. You have ${attempt} attempts left.</div>`
+          `<div class="alert alert-danger mt-3" role="alert">Login failed. You have ${attempt} attempts left.</div>`
         );
         if (attempt === 0) {
           $("#loginEmail, #loginPassword, #loginButton").prop("disabled", true);
         }
-      }
-    })
-    .fail(function () {
-      attempt--;
-      $(".alert-danger").remove();
-      $("#loginForm").append(
-        `<div class="alert alert-danger mt-3" role="alert">Login failed. You have ${attempt} attempts left.</div>`
-      );
-      if (attempt === 0) {
-        $("#loginEmail, #loginPassword, #loginButton").prop("disabled", true);
-      }
-    });
-  })  
+      });
+  });
 });

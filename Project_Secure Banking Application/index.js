@@ -11,13 +11,18 @@ app.use(express.static("public")); //
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get("/", (req, res) => {
+  res.redirect("/login.html");
+});
+
 app.post("/register", function (req, res) {
   db.registerAccount(req, res);
+ // console.log(req.body);
 });
 
 app.post("/login", function (req, res) {
   db.loginCustomer(req, res);
-  console.log(req.body);
+  //console.log(req.body);
 });
 
 app.post("/balance", (req, res) => {

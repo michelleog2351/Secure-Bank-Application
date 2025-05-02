@@ -8,35 +8,37 @@ $(document).ready(function () {
               <label for="registerFName" class="form-label">First Name</label>
               <input type="text" class="form-control" id="registerFName" name="registerFName" required>
           </div>
+          
           <div class="col-md-6 mb-3">
               <label for="registerLName" class="form-label">Last Name</label>
               <input type="text" class="form-control" id="registerLName" name="registerLName" required>
           </div>
       </div>
+
       <div class="mb-3">
           <label for="registerEmail" class="form-label">Email</label>
           <input type="email" class="form-control" id="registerEmail" name="registerEmail" placeholder="example@atu.ie" required>
       </div>
+
       <div class="mb-3">
           <label for="registerphoneNo" class="form-label">Phone No.</label>
           <input type="tel" class="form-control" id="registerphoneNo" name="registerphoneNo" placeholder="+353 564 7891" required>
-          <div id="phoneNoError"></div>
       </div>
+
       <div class="mb-3">
           <label for="registerUsername" class="form-label">Username</label>
           <input type="text" class="form-control" id="registerUsername" name="registerUsername" placeholder="firstname.lastname" required>
-          <div id="usernameError"></div>
       </div>
+
       <div class="mb-3">
           <label for="registerPassword" class="form-label">Password</label>
           <input type="password" class="form-control" id="registerPassword" name="password" required>
-          <div id="passwordError"></div>
       </div>
+
       <div class="mb-3">
           <label for="registerConfirmPassword" class="form-label">Confirm Password</label>
           <input type="password" class="form-control" id="registerConfirmPassword" name="confirmPassword" required>
       </div>
-      <div id="confirmPasswordError"></div>
       <br>
       <button type="submit" class="btn btn-primary w-100" id="registerButton">Register</button>
   `);
@@ -67,7 +69,6 @@ $(document).ready(function () {
       case "registerConfirmPassword":
         validateConfirmPassword(value);
         break;
-      // Add other cases for more fields if necessary
     }
   }
 
@@ -75,20 +76,20 @@ $(document).ready(function () {
   function validateEmail(value) {
     var emailRegEx = /^[a-zA-Z0-9._%+-]+@atu\.ie$/;
     if (!emailRegEx.test(value)) {
-      showError("#registerEmail", "Please enter a valid atu.ie email.");
+      showAlert("#registerEmail", "Please enter a valid atu.ie email.");
     } else {
-      hideError("#registerEmail");
+      hideAlert("#registerEmail");
     }
   }
 
-  // Phone validation
+  // Phone number validation
   function validatePhone(value) {
     var phoneNoRegEx =
       /^(\+\d{1,4}[\s]?\d{1,4}[\s]?\d{1,4}|\d{3}[\s]?\d{3}[\s]?\d{4})$/;
     if (!phoneNoRegEx.test(value)) {
-      showError("#registerphoneNo", "Please enter a valid phone number.");
+      showAlert("#registerphoneNo", "Please enter a valid phone number.");
     } else {
-      hideError("#registerphoneNo");
+      hideAlert("#registerphoneNo");
     }
   }
 
@@ -96,12 +97,12 @@ $(document).ready(function () {
   function validateUsername(value) {
     var usernameRegEx = /^[a-zA-Z]{3,20}\.[a-zA-Z]{3,20}$/;
     if (!usernameRegEx.test(value)) {
-      showError(
+      showAlert(
         "#registerUsername",
         "Please enter a valid username (e.g., firstname.lastname)."
       );
     } else {
-      hideError("#registerUsername");
+      hideAlert("#registerUsername");
     }
   }
 
@@ -109,12 +110,12 @@ $(document).ready(function () {
   function validatePassword(value) {
     var passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/;
     if (!passwordRegEx.test(value)) {
-      showError(
+      showAlert(
         "#registerPassword",
         "Password must be at least 9 characters long, with a mix of letters, numbers, and special characters."
       );
     } else {
-      hideError("#registerPassword");
+      hideAlert("#registerPassword");
     }
   }
 
@@ -122,20 +123,30 @@ $(document).ready(function () {
   function validateConfirmPassword(value) {
     var password = $("#registerPassword").val();
     if (value !== password) {
-      showError("#registerConfirmPassword", "Passwords do not match!");
+      showAlert("#registerConfirmPassword", "Passwords do not match!");
     } else {
-      hideError("#registerConfirmPassword");
+      hideAlert("#registerConfirmPassword");
     }
   }
 
   // Show error alert below input
-  function showError(inputId, message) {
-    $(inputId).after(`<div class="alert alert-danger mt-2">${message}</div>`);
+  function showAlert(inputId, message) {
+    const $input = $(inputId);
+    const $next = $input.next(".alert-danger");
+    if ($next.length) {
+      $next.text(message); // Update existing error message
+    } else {
+      $input.after(`<div class="alert alert-danger mt-2">${message}</div>`);
+    }
   }
 
   // Hide error alert
-  function hideError(inputId) {
-    $(inputId).siblings(".alert-danger").remove();
+  function hideAlert(inputId) {
+    const $input = $(inputId);
+    const $next = $input.next(".alert-danger");
+    if ($next.length) {
+      $next.remove();
+    }
   }
 
   // Form submission handler
@@ -151,13 +162,13 @@ $(document).ready(function () {
 
     // Validation check for all fields
     if (
-      $("#registerEmail").siblings(".alert-danger").length ||
-      $("#registerphoneNo").siblings(".alert-danger").length ||
-      $("#registerUsername").siblings(".alert-danger").length ||
-      $("#registerPassword").siblings(".alert-danger").length ||
-      $("#registerConfirmPassword").siblings(".alert-danger").length
+      $("#registerEmail").next(".alert-danger").length ||
+      $("#registerphoneNo").next(".alert-danger").length ||
+      $("#registerUsername").next(".alert-danger").length ||
+      $("#registerPassword").next(".alert-danger").length ||
+      $("#registerConfirmPassword").next(".alert-danger").length
     ) {
-      return; // If any errors are present, don't submit form
+      return; // Don’t submit if any errors
     }
 
     // Disable the submit button while processing

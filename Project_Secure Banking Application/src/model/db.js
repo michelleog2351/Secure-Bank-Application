@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "password",
-  database: "bank_system"
+  database: "bank_system",
 });
 
 connection.connect(function (err) {
@@ -21,7 +21,7 @@ exports.registerAccount = function (req, res) {
     phone_no,
     username,
     password,
-    balance
+    balance,
   } = req.body;
 
   // Generate salt and hash the password
@@ -32,7 +32,15 @@ exports.registerAccount = function (req, res) {
     bcrypt.hash(password, salt, (err, hashedPassword) => {
       if (err) throw err;
 
-      console.log("Insert values:", values);
+      // console.log("Insert values:", {
+      //   first_name,
+      //   last_name,
+      //   email,
+      //   phone_no,
+      //   username,
+      //   password,
+      //   balance,
+      // });
 
       // hashed password and salt entered into the query before insertion into db
       const query = `INSERT INTO customer (first_name, last_name, email, phone_no, username, password_hash, salt, balance) 
@@ -48,17 +56,17 @@ exports.registerAccount = function (req, res) {
           username,
           hashedPassword,
           salt,
-          balance
+          balance,
         ],
         function (err, rows, fields) {
           if (err) {
-            console.error("Database Insert Error:", err);  // Add this line
+            console.error("Database Insert Error:", err); // Add this line
             res.status(500).send("Error creating account, please try again...");
             return;
           }
-          
 
           res.send("Account successfully created" + rows.insertId);
+          //console.log("Request body:", req.body);
         }
       );
     });
@@ -81,14 +89,26 @@ exports.loginCustomer = function (req, res) {
       const savedPasswordHash = rows[0].password_hash;
 
       // Hash the entered password with the saved salt
-      bcrypt.hash(loginPassword, savedSalt, (err, hashedLoginAttempt) => {
+      // bcrypt.hash(loginPassword, savedSalt, (err, hashedLoginAttempt) => {
+      //   if (err) {
+      //     res.status(500).send("Error verifying password.");
+      //     return;
+      //   }
+
+      //   // Compare hashed attempt with the stored hash
+      //   if (hashedLoginAttempt === savedPasswordHash) {
+      //     res.send("Login successful!");
+      //   } else {
+      //     res.status(401).send("Invalid email or password.");
+      //   }
+      // });
+      bcrypt.compare(loginPassword, savedPasswordHash, (err, isMatch) => {
         if (err) {
           res.status(500).send("Error verifying password.");
           return;
         }
 
-        // Compare hashed attempt with the stored hash
-        if (hashedLoginAttempt === savedPasswordHash) {
+        if (isMatch) {
           res.send("Login successful!");
         } else {
           res.status(401).send("Invalid email or password.");
@@ -100,12 +120,12 @@ exports.loginCustomer = function (req, res) {
   });
 };
 
-exports.getBalance = function (accountNo, cb) {
+exports.getBalance = function (accountNo, currBal) {
   const sql = "SELECT balance FROM customer WHERE accountNo = ?";
   connection.query(sql, [accountNo], (err, rows) => {
-    if (err) return cb(err);
-    if (!rows.length) return cb(new Error("Not found"));
-    cb(null, rows[0].balance);
+    if (err) return currBal(err);
+    if (!rows.length) return currBal(new Error("Not found"));
+    currBal(null, rows[0].balance);
   });
 };
 
@@ -119,7 +139,7 @@ exports.updateBalance = function (accountNo, amount, isDeposit, currBal) {
     const sql = "UPDATE customer SET balance = ? WHERE accountNo = ?";
     connection.query(sql, [newBalance, accountNo], (err2) => {
       if (err2) return currBal(err2);
-      cb(null, newBalance, false);
+      currBal(null, newBalance, false);
     });
   });
 };

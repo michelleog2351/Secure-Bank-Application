@@ -4,14 +4,13 @@ $(document).ready(function () {
   //   alert("No account number found. Redirecting to login.");
   //   window.location.href = "login.html";
   // }
-  
+
   function appendActionButtons() {
     $("#accountActions").html("");
     $("#accountActions").append(`
             <button id="checkBalance" class="btn btn-primary">Check Balance</button>
             <button id="depositButton" class="btn btn-primary">Deposit</button>
             <button id="withdrawButton" class="btn btn-primary">Withdraw</button>
-            <button id="logoutButton" class="btn btn-primary">Logout</button>
         `);
   }
 
@@ -38,11 +37,6 @@ $(document).ready(function () {
         `);
   });
 
-  $(document).on("click", "#logoutButton", function () {
-    alert("Logging out...");
-    window.location.href = "login.html";
-  });
-
   $(document).on("click", "#confirmDeposit", function () {
     const depositAmount = parseFloat($("#depositAmount").val());
     if (!isNaN(depositAmount) && depositAmount > 0) {
@@ -63,13 +57,28 @@ $(document).ready(function () {
 
   appendActionButtons();
 
-  let currentBalance = 1000.00;
+  let currentBalance = 0.0;
   function checkBalance() {
     $("#balanceInfo").html(`Current balance: €${currentBalance.toFixed(2)}`);
   }
-  function updateBalance(accountNo, amount, isDeposit) {
-    currentBalance = isDeposit ? currentBalance + amount : currentBalance - amount;
+  function updateBalance(_accountNo, amount, isDeposit) {
+    currentBalance = isDeposit
+      ? currentBalance + amount
+      : currentBalance - amount;
     checkBalance();
   }
-  
+
+  // doesn't work
+  // function updateBalance(accountNo, amount, isDeposit) {
+  //   const endpoint = isDeposit ? "/deposit" : "/withdraw";
+
+  //   $.post(endpoint, { accountNo, amount }, function (data) {
+  //     currentBalance = data.newBalance;
+  //     checkBalance();
+  //   }).fail(function (xhr) {
+  //     const errorMsg =
+  //       xhr.status === 400 ? "Insufficient funds." : "Transaction failed.";
+  //     alert(errorMsg);
+  //   });
+  // }
 });

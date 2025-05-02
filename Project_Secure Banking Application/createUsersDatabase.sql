@@ -13,7 +13,7 @@ SET time_zone = "+00:00";
 -- Database: `bank_system`
 --
 
-DROP DATABASE IF EXISTS `bank_system`;
+-- DROP DATABASE IF EXISTS `bank_system`;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `bank_system` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
