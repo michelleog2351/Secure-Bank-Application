@@ -136,5 +136,7 @@ When a user registers, the system captures their details securely and inserts th
 - Unit Testing
 
 ### 👨‍💻 Author
+- Student No: L00176523 
+- Name: Michelle Ogunade
+- Module: Secure Programming
 
-Michelle Ogunade
