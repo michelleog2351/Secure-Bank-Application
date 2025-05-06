@@ -2,7 +2,7 @@
 
 ## 📋 Project Overview
 
-A secure banking web application designed to demonstrate secure programming practices, including account management, user authentication, secure coding, error handling, and database integration. The project combines front-end and back-end technologies to simulate core banking functionalities in a secure environment.
+A secure banking web application designed to demonstrate secure programming practices, including account management, user authentication, secure coding, error handling, and database integration. The project combines both front-end and back-end technologies to simulate core banking functionalities in a secure, working environment.
 
 ---
 
@@ -134,3 +134,7 @@ When a user registers, the system captures their details securely and inserts th
 
 - Manual testing of login and registration flows
 - Unit Testing
+
+### 👨‍💻 Author
+
+Michelle Ogunade
